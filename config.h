@@ -6,17 +6,30 @@ static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetbrainsMono Nerd Font:size=10" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10";
+static const char *fonts[]          = { "JetBrainsMonoNerd:size=14" };
+static const char dmenufont[]       = "monospace:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+
+// Rose Pine colors
+static const char col_rosepine_bg[]     = "#191724";
+static const char col_rosepine_bg_alt[] = "#1f1d2e";
+static const char col_rosepine_fg[]     = "#e0def4";
+static const char col_rosepine_fg_alt[] = "#6e6a86";
+static const char col_rosepine_pine[]   = "#31748f";
+static const char col_rosepine_rose[]   = "#eb6f92";
+static const char col_rosepine_gold[]   = "#f6c177";
+static const char col_rosepine_moon[]   = "#9ccfd8";
+static const char col_rosepine_blossom[] = "#f6c177";
+static const char col_rosepine_text[]   = "#e0def4";
+
+static const char *colors[][3] = {
+    /*               fg                 bg                 border   */
+    [SchemeNorm] = { col_rosepine_fg,    col_rosepine_bg,    col_rosepine_bg_alt },
+    [SchemeSel]  = { col_rosepine_bg,    col_rosepine_rose,  col_rosepine_rose },
 };
 
 /* tagging */
@@ -58,15 +71,13 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *firefox[]  = { "firefox", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_f, 	   spawn,          {.v = firefox } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
